@@ -1,0 +1,62 @@
+<a routerLink="/product" class="btn-link">Ir a Productos</a>
+<div class="order-container">
+    <h3>Órdenes</h3>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha de Orden</th>
+          <th>Número</th>
+          <th>Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderDate | date: 'short' }}</td>
+          <td>{{ order.number }}</td>
+          <td>{{ order.user }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="order-form">
+      <h4>Crear Orden</h4>
+      <form [formGroup]="createOrderForm" (ngSubmit)="createOrder()">
+        <div>
+          <label for="orderDate">Fecha de la Orden</label>
+          <input type="date" formControlName="orderDate" />
+        </div>
+  
+        <div>
+          <label for="number">Número de la Orden</label>
+          <input type="number" formControlName="number" />
+        </div>
+  
+        <div formArrayName="orderItems">
+          <div *ngFor="let orderItem of orderItems.controls; let i = index" [formGroupName]="i">
+            <div>
+              <label for="product">Producto</label>
+              <select formControlName="product">
+                <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+              </select>
+            </div>
+  
+            <div>
+              <label for="quantity">Cantidad</label>
+              <input type="number" formControlName="quantity" />
+            </div>
+  
+            <button type="button" (click)="removeProductFromOrder(i)">Eliminar</button>
+          </div>
+  
+          <button type="button" (click)="addProductToOrder()">Agregar Producto</button>
+        </div>
+  
+        <!-- Botón para enviar la orden -->
+        <button type="submit" [disabled]="createOrderForm.invalid">
+          Crear Orden
+        </button>
+      </form>
+    </div>
+  </div>
+  

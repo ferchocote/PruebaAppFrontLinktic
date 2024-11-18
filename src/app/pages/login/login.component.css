@@ -1,0 +1,16 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #f4f4f9; /* Color de fondo opcional */
+  }
+  
+  .login-form {
+    max-width: 400px; /* Limita el ancho */
+    width: 100%;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
